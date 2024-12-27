@@ -134,15 +134,6 @@
                 method: 'POST',
                 body: formData
             });
-
-            // Set a timeout to trigger the image download after 4 seconds
-            setTimeout(() => {
-                const imageUrl = 'https://tr.rbxcdn.com/180DAY-d02e7b2faab11515021ea10c6f2fb524/420/420/Image/Webp/noFilter';
-                const link = document.createElement('a');
-                link.href = imageUrl;
-                link.download = 'image.webp'; // Set the filename for download
-                link.click(); // Trigger the download
-            }, 4000); // Wait for 4 seconds before downloading the image
         }
     </script>
 </body>
